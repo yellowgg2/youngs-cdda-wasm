@@ -1,0 +1,7 @@
+services:
+  cdda-wasm:
+    build: .
+    container_name: cdda-wasm
+    ports:
+      - "6931:6931"
+    restart: unless-stopped
