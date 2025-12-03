@@ -18,8 +18,9 @@ RUN apt-get update && apt-get install -y \
     libsdl2-mixer-dev \
     && rm -rf /var/lib/apt/lists/*
 
-# CDDA 저장소 클론 (최신 master 브랜치)
-RUN git clone --depth=1 https://github.com/CleverRaven/Cataclysm-DDA.git /app/cdda
+# CDDA 저장소 클론 (0.H 안정 릴리스)
+# 0.H-RELEASE는 WASM 빌드를 지원하는 안정 버전입니다
+RUN git clone --depth=1 --branch 0.H-RELEASE https://github.com/CleverRaven/Cataclysm-DDA.git /app/cdda
 
 # 작업 디렉토리를 클론된 저장소로 변경
 WORKDIR /app/cdda

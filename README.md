@@ -59,7 +59,7 @@ docker compose up -d --build
 
 - **Base Image**: `emscripten/emsdk:3.1.51`
 - **Port**: 6931
-- **CDDA Version**: Latest master branch (built from source)
+- **CDDA Version**: 0.H-RELEASE (Herbert) - stable release with WASM support
 - **Build Type**: Release build with tiles and localization support
 - **Languages**: Korean (한글) and English only
 - **Server**: Emscripten's `emrun` development server
