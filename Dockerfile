@@ -45,11 +45,5 @@ RUN chmod +x build-scripts/build-emscripten.sh && \
 # emrun 기본 포트 노출
 EXPOSE 6931
 
-# 빌드 결과물 확인 및 디버깅
-RUN echo "=== Checking build output ===" && \
-    ls -la && \
-    find . -name "*.html" -type f && \
-    find . -name "cataclysm-tiles.js" -type f
-
-# emrun으로 실행 (빌드 결과물이 있는 디렉토리에서)
-CMD ["sh", "-c", "cd /app/cdda && emrun --no_browser --hostname 0.0.0.0 --port 6931 ."]
+# emrun으로 실행 (빌드 결과물이 있는 web 디렉토리에서)
+CMD ["emrun", "--no_browser", "--hostname", "0.0.0.0", "--port", "6931", "/app/cdda/build-data/web/index.html"]
