@@ -57,10 +57,20 @@ docker compose up -d --build
 
 ## 기술 세부사항
 
-- **베이스 이미지**: `emscripten/emsdk:latest`
+- **베이스 이미지**: `emscripten/emsdk:3.1.51`
 - **포트**: 6931
-- **CDDA 버전**: 0.H-RELEASE (2024-11-23)
+- **CDDA 버전**: 최신 master 브랜치 (소스 빌드)
+- **빌드 타입**: 타일 및 다국어 지원 릴리스 빌드
+- **언어**: 한글과 영어만 포함
 - **서버**: Emscripten의 `emrun` 개발 서버
+
+### 빌드 기능
+
+- 최신 [CDDA GitHub 저장소](https://github.com/CleverRaven/Cataclysm-DDA)에서 직접 빌드
+- 향상된 시각적 경험을 위한 타일 그래픽 포함
+- 한글과 영어 언어 지원
+- 더 나은 성능을 위한 최적화된 릴리스 빌드
+- 필수 언어만 포함하여 빠른 빌드 시간과 작은 이미지 크기
 
 ## 프로젝트 구조
 
