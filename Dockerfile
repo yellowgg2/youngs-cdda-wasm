@@ -32,6 +32,13 @@ RUN if [ -f lang/compile_mo.sh ]; then \
         lang/compile_mo.sh; \
     fi
 
+# 웹 데이터 준비 (게임 리소스 번들링)
+# 이 스크립트는 JSON, 그래픽, 사운드 등을 웹용으로 패키징합니다
+RUN if [ -f build-scripts/prepare-web-data.sh ]; then \
+        chmod +x build-scripts/prepare-web-data.sh && \
+        build-scripts/prepare-web-data.sh; \
+    fi
+
 # WASM 빌드 실행
 # TILES=1: 타일 그래픽 활성화
 # RELEASE=1: 릴리스 빌드 (최적화)
