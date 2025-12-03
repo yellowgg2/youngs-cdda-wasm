@@ -90,4 +90,4 @@ docker compose up -d --build
 
 - [Cataclysm: DDA GitHub](https://github.com/CleverRaven/Cataclysm-DDA)
 - [CDDA 공식 웹사이트](https://cataclysmdda.org/)
-- [CDDA 위키](https://cddawiki.chezzo.com/cdda_wiki/index.php)
+- [CDDA 위키](https://cataclysmdda.miraheze.org/wiki/Main_Page)
