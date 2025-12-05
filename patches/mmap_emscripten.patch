@@ -1,0 +1,57 @@
+--- a/src/mmap_file.cpp
++++ b/src/mmap_file.cpp
+@@ -1,5 +1,10 @@
+ #include "mmap_file.h"
+
++#ifdef __EMSCRIPTEN__
++#include <cstdio>
++#include <cstdlib>
++#endif
++
+ #include <memory>
+ #include <system_error>
+
+@@ -52,6 +57,42 @@ std::shared_ptr<const mapped_file> map_file( const std::string &path )
+     } );
+ }
+
++#elif defined(__EMSCRIPTEN__)
++
++/* Emscripten: use fread instead of mmap */
++std::shared_ptr<const mapped_file> map_file( const std::string &path )
++{
++    FILE *f = fopen( path.c_str(), "rb" );
++    if( !f ) {
++        return {};
++    }
++    fseek( f, 0, SEEK_END );
++    long size = ftell( f );
++    fseek( f, 0, SEEK_SET );
++    if( size <= 0 ) {
++        fclose( f );
++        return {};
++    }
++    char *data = static_cast<char *>( malloc( size ) );
++    if( !data ) {
++        fclose( f );
++        return {};
++    }
++    size_t bytes_read = fread( data, 1, size, f );
++    fclose( f );
++    if( bytes_read != static_cast<size_t>( size ) ) {
++        free( data );
++        return {};
++    }
++    return std::shared_ptr<const mapped_file>( new mapped_file {
++        data,
++        static_cast<size_t>( size ),
++        []( const mapped_file *mf ) {
++            free( const_cast<char *>( mf->data ) );
++            delete mf;
++        }
++    } );
++}
++
+ #else // Unix/Linux
+
+ #include <fcntl.h>
